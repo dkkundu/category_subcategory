@@ -1,0 +1,17 @@
+[Unit]
+Description=category_subcategory-uWSGI-instance
+After=network.target postgresql-11.service
+
+[Service]
+User=centos
+Group=nginx
+WorkingDirectory=/opt/category_subcategory
+Environment="PATH=/opt/category_subcategory/venv/bin"
+ExecStart=/opt/category_subcategory/venv/bin/uwsgi --ini /opt/category_subcategory/uwsgi/uwsgi.ini
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
